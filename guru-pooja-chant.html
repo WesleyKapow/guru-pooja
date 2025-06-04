@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta charset="UTF-8" />
+  <title>Guru Pooja Lyrics Player</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background-color: #fdfaf4;
+    }
+    .bold {
+        font-weight: bold;
+    }
+    .lyrics {
+      max-width: 1000px;
+      margin: auto;
+    }
+    .columns {
+      column-count: 2;
+      column-gap: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .columns {
+        column-count: 1;
+      }
+    }
+
+    .paragraph {
+      break-inside: avoid;
+      margin-bottom: 20px;
+    }
+    .line {
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .line:hover {
+      background-color: #eee;
+    }
+    .active {
+      background-color: #fde68a;
+    }
+    .grouped-line {
+      font-weight: bold;
+      display: flex;
+      flex-wrap: wrap;
+    }
+   .grouped-line span {
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .common {
+        cursor: default;
+    }
+    .common:hover {
+        background-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    const LRCPlayer = ({ lyrics, audioSrc }) => {
+      const audioRef = useRef(null);
+      const [currentTime, setCurrentTime] = useState(0);
+
+      useEffect(() => {
+        const interval = setInterval(() => {
+          if (audioRef.current) {
+            setCurrentTime(audioRef.current.currentTime);
+          }
+        }, 100);
+        return () => clearInterval(interval);
+      }, []);
+
+      const handleClickLine = (time) => {
+        if (audioRef.current) {
+          audioRef.current.currentTime = time;
+          audioRef.current.play();
+        }
+      };
+
+      const allLines = lyrics.filter(l => l.type !== 'grouped-repeats').flat();
+      const activeIndex = allLines.findIndex((line, i) => {
+        const next = allLines[i + 1];
+        return currentTime >= line.time && (!next || currentTime < next.time);
+      });
+
+      let globalLineIndex = 0;
+
+      return (
+        <div className="lyrics">
+          <audio ref={audioRef} controls src={audioSrc} style={{ width: "100%", marginBottom: "20px" }} />
+          <div className="columns">
+            {lyrics.map((block, i) => {
+                if (block.type === "grouped-repeats") {
+                    globalLineIndex++;
+                    const activeWordIndex = block.lines.findIndex((line, j) => {
+                        const next = block.lines[j + 1];
+                        return currentTime >= line.time && (!next || currentTime < next.time);
+                    });
+
+                    return (
+                        <div className="paragraph" key={`group-${i}`}>
+                        <div className="grouped-line">
+                            {block.lines.filter(l => l.text).map((line, j) => (
+                            <span
+                                key={j}
+                                onClick={() => handleClickLine(line.time)}
+                                className={j === activeWordIndex ? "active" : ""}
+                            >
+                                {line.text}
+                            </span>
+                            ))}
+                        </div>
+                        {block.common.map((text, j) => (
+                            <div className="line common" key={`common-${j}`}>{text}</div>
+                        ))}
+                        </div>
+                    );
+                }
+
+                return (
+                <div className="paragraph" key={`block-${i}`}>
+                    {block.filter(b => b.text).map((line, j) => {
+                    const isActive = globalLineIndex === activeIndex;
+                    const currentLine = (
+                        <div
+                        className={`line ${isActive ? "active" : ""} ${line.bold ? "bold" : ""}`}
+                        onClick={() => handleClickLine(line.time)}
+                        key={j}
+                        >
+                        {line.text}
+                        </div>
+                    );
+                    globalLineIndex++;
+                    return currentLine;
+                    })}
+                </div>
+                );
+            })}
+            </div>
+        </div>
+      );
+    };
+
+const lyrics = 
+[
+    [
+        {
+            "time": 0,
+            "text": "Apavitrah pavitrovā"
+        },
+        {
+            "time": 3.11,
+            "text": "Sarvāvasthāngatopi vā"
+        },
+        {
+            "time": 6.29,
+            "text": "Yasmaret Puṇḍarī Kāksham"
+        },
+        {
+            "time": 9.32,
+            "text": "Sabāhyābhyantarah shuchihi"
+        }
+    ],
+    [
+        {
+            "time": 13.73,
+            "text": "Āvāhanam",
+            "bold": true
+        },
+        {
+            "time": 16.92,
+            "text": "Nārāyaṇam Padmabhavam Vasiṣhṭham"
+        },
+        {
+            "time": 23.83,
+            "text": "Shaktim cha tatputra Parāsharancha"
+        },
+        {
+            "time": 30.2,
+            "text": "Vyāsam Shukam Gauḍapādam mahāntam"
+        },
+        {
+            "time": 36.84,
+            "text": "Govinda Yogīndramathāsya shiṣhyam"
+        }
+    ],
+    [
+        {
+            "time": 43.75,
+            "text": "Shrī Shankarāchāryamathāsya Padma"
+        },
+        {
+            "time": 50.5,
+            "text": "pādamcha Hastāmalakan cha shiṣhyam"
+        },
+        {
+            "time": 56.76,
+            "text": "Tamtroṭakam Vārtikakāramanyān"
+        },
+        {
+            "time": 63.67,
+            "text": "Asmad Gurūn santatamānatosmi"
+        }
+    ],
+    [
+        {
+            "time": 69.78,
+            "text": "Shruti Smṛti Purāṇānām"
+        },
+        {
+            "time": 74.29,
+            "text": "Ālayam karuṇālayam"
+        },
+        {
+            "time": 78.28,
+            "text": "Namāmi Bhagavat pādam"
+        },
+        {
+            "time": 82.01,
+            "text": "Shankaram loka shankaram"
+        }
+    ],
+    [
+        {
+            "time": 85.71,
+            "text": "Shankaram Shankarāchāryam"
+        },
+        {
+            "time": 89.7,
+            "text": "Keshavam Bādarāyaṇam"
+        },
+        {
+            "time": 93.95,
+            "text": "Sūtra bhāṣhya kṛtau vande"
+        },
+        {
+            "time": 98.2,
+            "text": "Bhagavantau punah punaha"
+        }
+    ],
+    [
+        {
+            "time": 102.45,
+            "text": "Yadvāre nikhilā nilimpa pariṣhad"
+        },
+        {
+            "time": 107.23,
+            "text": "Siddhim vidhatte nisham"
+        },
+        {
+            "time": 110.42,
+            "text": "Shrīmadshrī lasitam Jagat Gurupadam"
+        },
+        {
+            "time": 115.2,
+            "text": "Natvātmā tṛptim gataha"
+        }
+    ],
+    [
+        {
+            "time": 119.71,
+            "text": "Lokāgnāna payodha paṭanadhuram"
+        },
+        {
+            "time": 124.5,
+            "text": "Shrī Shankaram sharmadam"
+        },
+        {
+            "time": 127.95,
+            "text": "Brahmānanda Saraswatīm cha"
+        },
+        {
+            "time": 131.38,
+            "text": "Shrībrahmam Dhyāyāmi jyotir mayam"
+        },
+        { "time": 138.21, }
+    ],
+    {
+        type: "grouped-repeats",
+        lines: [
+            { "time": 138.21, "text": "Āvāhanam" },
+            { "time": 146.81, "text": "Āsanam" },
+            { "time": 155.84, "text": "Snānam" },
+            { "time": 164.71, "text": "Vastram" },
+            { "time": 173.11, "text": "Chandanam" },
+            { "time": 181.61, "text": "Puṣhpam" },
+            { "time": 190.1, "text": "Dhoopam" },
+            { "time": 199.4, "text": "Deepam" },
+            { "time": 208.17, "text": "Āchamanīyam" },
+            { "time": 216.93, "text": "Naivedyam" },
+            { "time": 225.9, "text": "Āchamanīyam" },
+            { "time": 234.73, "text": "Tāmbūlam" },
+            { "time": 243.9, "text": "Shrīphalam" },
+            { "time": 253.86 }
+        ],
+        common: ["Samarpayāmi", "Shrī Guru charaṇa kamalebhyo namaha"]
+    },
+    [
+        {
+            "time": 253.86,
+            "text": "Ārārtikyam",
+            "bold": true
+        },
+        {
+            "time": 259.6,
+            "text": "Karpūragauram karuṇāvatāram"
+        },
+        {
+            "time": 267.4,
+            "text": "Samsārasāram bhujagendrahāram"
+        },
+        {
+            "time": 275.9,
+            "text": "Sadāvasantam hṛdayāravinde"
+        },
+        {
+            "time": 284.05,
+            "text": "bhavam bhavānī sahitam namāmi"
+        },
+        { "time": 293.2 }
+    ],
+    {
+        type: "grouped-repeats",
+        lines: [
+            { "time": 293.2, "text": "Ārārtikyam", },
+            { "time": 304.3, "text": "Āchamanīyam", },
+            { "time": 314.15 }
+        ],
+        common: ["Samarpayāmi", "Shrī Guru charaṇa kamalebhyo namaha"]
+    },
+    [
+        {
+            "time": 314.15,
+            "text": "Puṣhpānjalim",
+            "bold": true
+        },
+        {
+            "time": 318.67,
+            "text": "Gurur Brahmā Gurur Viṣhṇuhu"
+        },
+        {
+            "time": 322.92,
+            "text": "Gurur devo Maheshwaraha"
+        },
+        {
+            "time": 327.6,
+            "text": "Guru sākshāt param Brahma"
+        },
+        {
+            "time": 331.85,
+            "text": "Tasmai shrī Gurave namaha"
+        }
+    ],
+    [
+        {
+            "time": 336.73,
+            "text": "Akhaṇḍa maṇḍalākāram"
+        },
+        {
+            "time": 340.88,
+            "text": "Vyāptam yena charācharam"
+        },
+        {
+            "time": 344.43,
+            "text": "Tatpadam darshitam yena"
+        },
+        {
+            "time": 347.89,
+            "text": "Tasmai shrī Gurave namaha"
+        }
+    ],
+    [
+        {
+            "time": 354.0,
+            "text": "Shrī Brahmānandam parama sukhadam"
+        },
+        {
+            "time": 358.24,
+            "text": "Kevalam gnāna mūrtim"
+        },
+        {
+            "time": 361.7,
+            "text": "Vishwātītam gagana sadṛsham"
+        },
+        {
+            "time": 365.68,
+            "text": "Tatwamasyādi lakshyam"
+        }
+    ],
+    [
+        {
+            "time": 369.4,
+            "text": "Ekam nityam vimalamachalam"
+        },
+        {
+            "time": 372.85,
+            "text": "sarvadhī sākshi bhūtam"
+        },
+        {
+            "time": 376.57,
+            "text": "bhāvātītam triguṇarahitam"
+        },
+        {
+            "time": 380.29,
+            "text": "Sadhgurum tamnamāmi"
+        }
+    ],
+    [
+        {
+            "time": 383.74,
+            "text": "Agnāna timirāndhasya"
+        },
+        {
+            "time": 386.93,
+            "text": "Gnānānjana shalākayā"
+        },
+        {
+            "time": 390.72,
+            "text": "Chakshurunmīlitam yena"
+        },
+        {
+            "time": 394.1,
+            "text": "Tasmai shree Gurave namaha"
+        }
+    ],
+    [
+        {
+            "time": 399.68,
+            "text": "Puṣhpānjalim",
+            "bold": true
+        },
+        {
+            "time": 401.90,
+            "text": "Samarpayāmi"
+        },
+        {
+            "time": 404.46,
+            "text": "Shrī Guru charaṇa kamalebhyo namaha"
+        },
+    {
+            "time": 410.0
+        }
+    ]
+]
+
+      const audioSrc = "https://innerengineering.sadhguru.org/lib/doc/guru-pooja-chant.mp3"; // Ensure this file is in the same folder
+
+    ReactDOM.createRoot(document.getElementById("root")).render(
+      <LRCPlayer lyrics={lyrics} audioSrc={audioSrc} />
+    );
+  </script>
+</body>
+</html>
+
