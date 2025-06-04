@@ -1,0 +1,268 @@
+[
+  [
+    {
+      "time": 0,
+      "text": "Apavitrah pavitrovā"
+    },
+    {
+      "time": 3.11,
+      "text": "Sarvāvasthāngatopi vā"
+    },
+    {
+      "time": 6.29,
+      "text": "Yasmaret Puṇḍarī Kāksham"
+    },
+    {
+      "time": 9.32,
+      "text": "Sabāhyābhyantarah shuchihi"
+    }
+  ],
+  [
+    {
+      "time": 13.73,
+      "text": "Āvāhanam",
+      "bold": true
+    },
+    {
+      "time": 16.92,
+      "text": "Nārāyaṇam Padmabhavam Vasiṣhṭham"
+    },
+    {
+      "time": 23.83,
+      "text": "Shaktim cha tatputra Parāsharancha"
+    },
+    {
+      "time": 30.2,
+      "text": "Vyāsam Shukam Gauḍapādam mahāntam"
+    },
+    {
+      "time": 36.84,
+      "text": "Govinda Yogīndramathāsya shiṣhyam"
+    }
+  ],
+  [
+    {
+      "time": 43.75,
+      "text": "Shrī Shankarāchāryamathāsya Padma"
+    },
+    {
+      "time": 50.5,
+      "text": "pādamcha Hastāmalakan cha shiṣhyam"
+    },
+    {
+      "time": 56.76,
+      "text": "Tamtroṭakam Vārtikakāramanyān"
+    },
+    {
+      "time": 63.67,
+      "text": "Asmad Gurūn santatamānatosmi"
+    }
+  ],
+  [
+    {
+      "time": 69.78,
+      "text": "Shruti Smṛti Purāṇānām"
+    },
+    {
+      "time": 74.29,
+      "text": "Ālayam karuṇālayam"
+    },
+    {
+      "time": 78.28,
+      "text": "Namāmi Bhagavat pādam"
+    },
+    {
+      "time": 82.01,
+      "text": "Shankaram loka shankaram"
+    }
+  ],
+  [
+    {
+      "time": 85.71,
+      "text": "Shankaram Shankarāchāryam"
+    },
+    {
+      "time": 89.7,
+      "text": "Keshavam Bādarāyaṇam"
+    },
+    {
+      "time": 93.95,
+      "text": "Sūtra bhāṣhya kṛtau vande"
+    },
+    {
+      "time": 98.2,
+      "text": "Bhagavantau punah punaha"
+    }
+  ],
+  [
+    {
+      "time": 102.45,
+      "text": "Yadvāre nikhilā nilimpa pariṣhad"
+    },
+    {
+      "time": 107.23,
+      "text": "Siddhim vidhatte nisham"
+    },
+    {
+      "time": 110.42,
+      "text": "Shrīmadshrī lasitam Jagat Gurupadam"
+    },
+    {
+      "time": 115.2,
+      "text": "Natvātmā tṛptim gataha"
+    }
+  ],
+  [
+    {
+      "time": 119.71,
+      "text": "Lokāgnāna payodha paṭanadhuram"
+    },
+    {
+      "time": 124.5,
+      "text": "Shrī Shankaram sharmadam"
+    },
+    {
+      "time": 127.95,
+      "text": "Brahmānanda Saraswatīm cha"
+    },
+    {
+      "time": 131.38,
+      "text": "Shrībrahmam Dhyāyāmi jyotir mayam"
+    }
+  ],
+  [{ "time": 138.21, "text": "offerings" }],
+  [
+    {
+      "time": 253.86,
+      "text": "Ārārtikyam",
+      "bold": true
+    },
+    {
+      "time": 259.6,
+      "text": "Karpūragauram karuṇāvatāram"
+    },
+    {
+      "time": 267.4,
+      "text": "Samsārasāram bhujagendrahāram"
+    },
+    {
+      "time": 275.9,
+      "text": "Sadāvasantam hṛdayāravinde"
+    },
+    {
+      "time": 284.05,
+      "text": "bhavam bhavānī sahitam namāmi"
+    }
+  ],
+  [{ "time": 293.2, "text": "offerings" }],
+  [
+    {
+      "time": 314.15,
+      "text": "Puṣhpānjalim",
+      "bold": true
+    },
+    {
+      "time": 318.67,
+      "text": "Gurur Brahmā Gurur Viṣhṇuhu"
+    },
+    {
+      "time": 322.92,
+      "text": "Gurur devo Maheshwaraha"
+    },
+    {
+      "time": 327.6,
+      "text": "Guru sākshāt param Brahma"
+    },
+    {
+      "time": 331.85,
+      "text": "Tasmai shrī Gurave namaha"
+    }
+  ],
+  [
+    {
+      "time": 336.73,
+      "text": "Akhaṇḍa maṇḍalākāram"
+    },
+    {
+      "time": 340.88,
+      "text": "Vyāptam yena charācharam"
+    },
+    {
+      "time": 344.43,
+      "text": "Tatpadam darshitam yena"
+    },
+    {
+      "time": 347.89,
+      "text": "Tasmai shrī Gurave namaha"
+    }
+  ],
+  [
+    {
+      "time": 354.0,
+      "text": "Shrī Brahmānandam parama sukhadam"
+    },
+    {
+      "time": 358.24,
+      "text": "Kevalam gnāna mūrtim"
+    },
+    {
+      "time": 361.7,
+      "text": "Vishwātītam gagana sadṛsham"
+    },
+    {
+      "time": 365.68,
+      "text": "Tatwamasyādi lakshyam"
+    }
+  ],
+  [
+    {
+      "time": 369.4,
+      "text": "Ekam nityam vimalamachalam"
+    },
+    {
+      "time": 372.85,
+      "text": "sarvadhī sākshi bhūtam"
+    },
+    {
+      "time": 376.57,
+      "text": "bhāvātītam triguṇarahitam"
+    },
+    {
+      "time": 380.29,
+      "text": "Sadhgurum tamnamāmi"
+    }
+  ],
+  [
+    {
+      "time": 383.74,
+      "text": "Agnāna timirāndhasya"
+    },
+    {
+      "time": 386.93,
+      "text": "Gnānānjana shalākayā"
+    },
+    {
+      "time": 390.72,
+      "text": "Chakshurunmīlitam yena"
+    },
+    {
+      "time": 394.1,
+      "text": "Tasmai shree Gurave namaha"
+    }
+  ],
+  [
+    {
+      "time": 399.68,
+      "text": "Puṣhpānjalim",
+      "bold": true
+    },
+    {
+      "time": 401.9,
+      "text": "Samarpayāmi"
+    },
+    {
+      "time": 404.46,
+      "text": "Shrī Guru charaṇa kamalebhyo namaha"
+    }
+  ]
+]
